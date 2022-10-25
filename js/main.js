@@ -18,8 +18,9 @@ $.fn.gameLLK = function($options) {
     var picNum1 = $settings.picNum;
     var picNum2 = picNum1 - 1;
 	var level = $settings.level;
-	var storage = window.localStorage;
+	//var storage = window.localStorage;
 	//storage.setItem('level',3)
+	document.cookie = "level=3";
 
     //鍏蜂綋娓告垙娴佺▼
     gameStar();
@@ -108,8 +109,12 @@ $.fn.gameLLK = function($options) {
 
         var html1 = '';
         var html2 = '';
-		var lev = storage.getItem('level')
-		lev = lev?lev:level
+		//var lev = storage.getItem('level')
+		var strCookie = document.cookie;
+		document.cookie = "level=3";
+		alert(document.cookie)
+		var arr = strCookie.split("=");
+		lev = arr[1]?arr[1]:level
         for (var i = 0; i <= picNum2; i++) {
             html1 += '<li data-roleid="' + randomArr1[i] + '"><img src="images/role' + randomArr1[i] + '.jpg" alt=""><div class="z-d-l-'+lev+'"></div></li>'
 
@@ -132,7 +137,7 @@ $.fn.gameLLK = function($options) {
         if (flag) {
             $('.endtime').text(t);
         }else {
-            $('.game-result').find('p').html('鏃堕棿鍒板暒~');
+            $('.game-result').find('p').html('继续加油哦~');
         }
         $('.beauty').slideUp();
         $('.mask').fadeIn().find('.game-result').fadeIn();
@@ -140,13 +145,14 @@ $.fn.gameLLK = function($options) {
 
     //鍦ㄧ帺涓€娆�
     $('.play-again').on('click', function() {
-		
-		storage.setItem('level',level++);
+		level++;
+		document.cookie = "level="+level;
+		//storage.setItem('level',level++);
         location.reload();
     });
 	
 	$('.show-score').on('click', function() {
-		let time = $('.endtime').text(t);
+		let time = $('.endtime').text();
 		let endTime = parseInt(time);
 		if(endTime<=15){
 			alert('恭喜你，得倒100分');
