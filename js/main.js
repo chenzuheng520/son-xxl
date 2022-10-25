@@ -145,9 +145,12 @@ $.fn.gameLLK = function($options) {
 
     //鍦ㄧ帺涓€娆�
     $('.play-again').on('click', function() {
-		level++;
-		document.cookie = "level="+level;
-		//storage.setItem('level',level++);
+	var strCookie = document.cookie;
+	var arr = strCookie.split("=");
+	var level = arr[1];
+	level++;
+	document.cookie = "level="+level;
+	//storage.setItem('level',level++);
         location.reload();
     });
 	
