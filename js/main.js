@@ -20,7 +20,7 @@ $.fn.gameLLK = function($options) {
 	var level = $settings.level;
 	//var storage = window.localStorage;
 	//storage.setItem('level',3)
-	document.cookie = "level=3";
+	//document.cookie = "level=3";
 
     //鍏蜂綋娓告垙娴佺▼
     gameStar();
@@ -111,8 +111,8 @@ $.fn.gameLLK = function($options) {
         var html2 = '';
 		//var lev = storage.getItem('level')
 		var strCookie = document.cookie;
-		document.cookie = "level=3";
-		alert(document.cookie)
+		//document.cookie = "level=3";
+		//alert(document.cookie)
 		var arr = strCookie.split("=");
 		lev = arr[1]?arr[1]:level
         for (var i = 0; i <= picNum2; i++) {
