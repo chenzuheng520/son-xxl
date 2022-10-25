@@ -5,6 +5,7 @@ $.fn.gameLLK = function($options) {
     var $defaults = {
         picNum: 12,
         time: 120,
+		level:1,
         gameWinCbk: function gameWinCbk(t) {
         }
     }
@@ -16,6 +17,9 @@ $.fn.gameLLK = function($options) {
     var timeVal = $settings.time;
     var picNum1 = $settings.picNum;
     var picNum2 = picNum1 - 1;
+	var level = $settings.level;
+	var storage = window.localStorage;
+	//storage.setItem('level',3)
 
     //鍏蜂綋娓告垙娴佺▼
     gameStar();
@@ -104,14 +108,16 @@ $.fn.gameLLK = function($options) {
 
         var html1 = '';
         var html2 = '';
+		var lev = storage.getItem('level')
+		lev = lev?lev:level
         for (var i = 0; i <= picNum2; i++) {
-            html1 += '<li data-roleid="' + randomArr1[i] + '"><img src="images/role' + randomArr1[i] + '.jpg" alt=""></li>'
+            html1 += '<li data-roleid="' + randomArr1[i] + '"><img src="images/role' + randomArr1[i] + '.jpg" alt=""><div class="z-d-l-'+lev+'"></div></li>'
 
         }
 
         $('.beauty ul').append(html1);
         for (var j = 0; j <= picNum2; j++) {
-            html2 = '<li data-roleid="' + randomArr2[j] + '"><img src="images/role' + randomArr2[j] + '.jpg" alt=""></li>';
+            html2 = '<li data-roleid="' + randomArr2[j] + '"><img src="images/role' + randomArr2[j] + '.jpg" alt=""><div class="z-d-r-'+lev+'"></div></li>';
             if (j % 2 == 0) {
                 $('.beauty ul').children('li').eq(randomArr3[j]).before(html2);
             } else {
@@ -134,6 +140,26 @@ $.fn.gameLLK = function($options) {
 
     //鍦ㄧ帺涓€娆�
     $('.play-again').on('click', function() {
+		
+		storage.setItem('level',level++);
         location.reload();
     });
+	
+	$('.show-score').on('click', function() {
+		let time = $('.endtime').text(t);
+		let endTime = parseInt(time);
+		if(endTime<=15){
+			alert('恭喜你，得倒100分');
+		}else if(endTime>15&&endTime<=20){
+			alert('恭喜你，得倒98分');
+		}else if(endTime>20&&endTime<=30){
+			alert('恭喜你，得倒95分');
+		}else if(endTime>30&&endTime<=40){
+			alert('恭喜你，得倒90分');
+		}else if(endTime>40&&endTime<=50){
+			alert('恭喜你，得倒80分');
+		}else{
+			alert('恭喜你，得倒60分');
+		}
+	});
 }
