@@ -112,9 +112,9 @@ $.fn.gameLLK = function($options) {
 		//var lev = storage.getItem('level')
 		var strCookie = document.cookie;
 		//document.cookie = "level=3";
-		//alert(document.cookie)
+		alert(document.cookie)
 		var arr = strCookie.split("=");
-		lev = arr[1]?arr[1]:level
+		var lev = arr[1]?arr[1]:level
         for (var i = 0; i <= picNum2; i++) {
             html1 += '<li data-roleid="' + randomArr1[i] + '"><img src="images/role' + randomArr1[i] + '.jpg" alt=""><div class="z-d-l-'+lev+'"></div></li>'
 
