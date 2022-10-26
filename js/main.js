@@ -192,6 +192,6 @@ $.fn.gameLLK = function($options) {
 		return level;
 	}
 	function setCookie(level){
-		document.cookie = "level="+level;
+		document.cookie = '"level='+level+'"';
 	}
 }
