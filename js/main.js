@@ -126,8 +126,9 @@ $.fn.gameLLK = function($options) {
         var html2 = '';
 		//var lev = storage.getItem('level')
 		var lv = getCookie();
+	    	alert('第'+lv+'关');
 		var lev = lv?lv:level;
-		//lev = 4;
+		lev = 4;
 		//level = lev
 		alert('第'+lev+'关');
         for (var i = 0; i <= picNum2; i++) {
@@ -192,6 +193,6 @@ $.fn.gameLLK = function($options) {
 		return level;
 	}
 	function setCookie(level){
-		document.cookie = '"level='+level+'"';
+		document.cookie = "level="+level;
 	}
 }
