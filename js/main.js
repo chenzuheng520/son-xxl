@@ -52,21 +52,21 @@ $.fn.gameLLK = function($options) {
 					},100);
                     //涓嶉厤瀵�
                     if ($(this).attr('data-roleid') != $('.active').attr('data-roleid')) {
-						$('.active').find('div').animate({
-							opacity: 1,
-						},100);
+						$('.active').find('div').css({
+							opacity: 1
+						});
                         $(this).addClass('active').siblings().removeClass('active');
 						
                     } else if ($(this).index() === $('.active').index()) { //鏄惁鏈韩
-						$('.active').find('div').animate({
-							opacity: 0,
-						},100);
+						$('.active').find('div').css({
+							opacity: 0
+						});
 						return;
                     } else { //閰嶅    
 						
-						$(this).find('div').animate({
-							opacity: 0,
-						},200);
+						$(this).find('div').css({
+							opacity: 0
+						});
 						
                         $(this).stop().animate({
                             opacity: 0,
