@@ -47,12 +47,27 @@ $.fn.gameLLK = function($options) {
                 return false;
             } else {
                 $('.beauty ul').on('click', 'li', function() {
+					$('this').find('div').animate({
+						opacity: 0,
+					},100);
                     //涓嶉厤瀵�
                     if ($(this).attr('data-roleid') != $('.active').attr('data-roleid')) {
+						$('.active').find('div').animate({
+							opacity: 1,
+						},100);
                         $(this).addClass('active').siblings().removeClass('active');
+						
                     } else if ($(this).index() === $('.active').index()) { //鏄惁鏈韩
-                        return;
+						$('.active').find('div').animate({
+							opacity: 0,
+						},100);
+						return;
                     } else { //閰嶅    
+						
+						$(this).find('div').animate({
+							opacity: 0,
+						},200);
+						
                         $(this).stop().animate({
                             opacity: 0,
                         }, 400, function() {
@@ -110,11 +125,11 @@ $.fn.gameLLK = function($options) {
         var html1 = '';
         var html2 = '';
 		//var lev = storage.getItem('level')
-		var strCookie = document.cookie;
-		//document.cookie = "level=3";
-		alert(document.cookie)
-		var arr = strCookie.split("=");
-		var lev = arr[1]?arr[1]:level
+		var lv = getCookie();
+		var lev = lv?lv:level;
+		//lev = 4;
+		//level = lev
+		alert('第'+lev+'关');
         for (var i = 0; i <= picNum2; i++) {
             html1 += '<li data-roleid="' + randomArr1[i] + '"><img src="images/role' + randomArr1[i] + '.jpg" alt=""><div class="z-d-l-'+lev+'"></div></li>'
 
@@ -145,12 +160,10 @@ $.fn.gameLLK = function($options) {
 
     //鍦ㄧ帺涓€娆�
     $('.play-again').on('click', function() {
-	var strCookie = document.cookie;
-	var arr = strCookie.split("=");
-	var level = arr[1];
-	level++;
-	document.cookie = "level="+level;
-	//storage.setItem('level',level++);
+		//storage.setItem('level',level++);
+		var level = getCookie();
+		level++;
+		setCookie(level)
         location.reload();
     });
 	
@@ -171,4 +184,14 @@ $.fn.gameLLK = function($options) {
 			alert('恭喜你，得倒60分');
 		}
 	});
+	
+	function getCookie(){
+		var strCookie = document.cookie;
+		var arr = strCookie.split("=");
+		var level = arr[1];
+		return level;
+	}
+	function setCookie(level){
+		document.cookie = "level="+level;
+	}
 }
